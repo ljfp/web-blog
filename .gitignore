@@ -1,0 +1,42 @@
+# Nikola output folder (generated files, not source)
+output/
+
+# Cache files created by Nikola
+cache/
+*.doit.db*
+
+# Dependency and virtual environment files
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Log files
+*.log
+
+# Backup and temporary files
+*~
+*.swp
+*.bak
+*.tmp
+
+# Isso database (if stored locally)
+isso.db
+
+# Localized content builds (optional)
+*.mo
+
+# User-specific or editor-specific files
+.DS_Store
+.idea/
+*.iml
+.vscode/
+
+# Static or temporary uploads
+uploads/
+tmp/
+
+# Generated content for specific languages (optional)
+translations/
+
