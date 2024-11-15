@@ -1,0 +1,63 @@
+name: Deploy Nikola Site to EC2
+
+on:
+  push:
+    branches:
+      - main # Replace with your default branch if different
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install Nikola
+        run: |
+          pip install --upgrade pip setuptools wheel
+          pip install --upgrade "Nikola[extras]"
+
+      - name: Build Nikola site
+        run: |
+          nikola build
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            rm -rf ~/nikola_output
+            mkdir -p ~/nikola_output
+            exit
+
+      - name: Copy Files to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          source: "output/*"
+          target: "~/nikola_output/"
+
+      - name: Move Files to Web Directory
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            sudo rm -rf /var/www/*
+            sudo mv ~/nikola_output/* /var/www/
+            sudo chown -R www-data:www-data /var/www/
