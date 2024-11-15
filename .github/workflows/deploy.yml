@@ -58,6 +58,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
           script: |
-            sudo rm -rf /var/www/*
-            sudo mv ~/nikola_output/* /var/www/
-            sudo chown -R www-data:www-data /var/www/
+            sudo rm -rf /data/www/*
+            sudo mv ~/nikola_output/* /data/www/
+            sudo chown -R www-data:www-data /data/www/
