@@ -1,42 +1,47 @@
-# Nikola output folder (generated files, not source)
-output/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Cache files created by Nikola
-cache/
-*.doit.db*
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+/.yarn/*
+!/.yarn/releases
+!/.yarn/plugins
+!/.yarn/sdks
 
-# Dependency and virtual environment files
-venv/
-env/
-__pycache__/
-*.pyc
-*.pyo
+# testing
+/coverage
 
-# Log files
-*.log
+# next.js
+/.next/
+/out/
+public/sitemap.xml
+.vercel
 
-# Backup and temporary files
-*~
-*.swp
-*.bak
-*.tmp
+# production
+/build
+*.xml
 
-# Isso database (if stored locally)
-isso.db
+# rss feed
+/public/feed.xml
 
-# Localized content builds (optional)
-*.mo
+# search
+/public/search.json
 
-# User-specific or editor-specific files
+# misc
 .DS_Store
-.idea/
-*.iml
-.vscode/
 
-# Static or temporary uploads
-uploads/
-tmp/
+# debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Generated content for specific languages (optional)
-translations/
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
+# Contentlayer
+.contentlayer
